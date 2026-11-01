@@ -16,6 +16,55 @@ const initialValues = {
   bmi: '21.5',
 }
 
+// Moved outside Dashboard to prevent focus loss
+function SelectField({ label, name, options, value, onChange }) {
+  return (
+    <div className="demo-field">
+      <label htmlFor={name}>{label}</label>
+      <select
+        id={name}
+        name={name}
+        value={value}
+        onChange={onChange}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+}
+
+// Moved outside Dashboard to prevent focus loss
+function NumberField({
+  label,
+  name,
+  min,
+  max,
+  step = '1',
+  value,
+  onChange,
+}) {
+  return (
+    <div className="demo-field">
+      <label htmlFor={name}>{label}</label>
+      <input
+        id={name}
+        name={name}
+        type="number"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={onChange}
+        required
+      />
+    </div>
+  )
+}
+
 function Dashboard() {
   const [values, setValues] = useState(initialValues)
   const [result, setResult] = useState(null)
@@ -88,41 +137,6 @@ function Dashboard() {
     setResult(null)
     setError('')
   }
-
-  const SelectField = ({ label, name, options }) => (
-    <div className="demo-field">
-      <label htmlFor={name}>{label}</label>
-      <select
-        id={name}
-        name={name}
-        value={values[name]}
-        onChange={updateValue}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </div>
-  )
-
-  const NumberField = ({ label, name, min, max, step = '1' }) => (
-    <div className="demo-field">
-      <label htmlFor={name}>{label}</label>
-      <input
-        id={name}
-        name={name}
-        type="number"
-        min={min}
-        max={max}
-        step={step}
-        value={values[name]}
-        onChange={updateValue}
-        required
-      />
-    </div>
-  )
 
   return (
     <>
@@ -215,6 +229,8 @@ function Dashboard() {
               <SelectField
                 label="NAT2 slow acetylator feature"
                 name="nat2_slow"
+                value={values.nat2_slow}
+                onChange={updateValue}
                 options={[
                   { value: '0', label: 'No' },
                   { value: '1', label: 'Yes' },
@@ -224,6 +240,8 @@ function Dashboard() {
               <SelectField
                 label="CYP2E1 c1/c1 feature"
                 name="cyp2e1_c1c1"
+                value={values.cyp2e1_c1c1}
+                onChange={updateValue}
                 options={[
                   { value: '0', label: 'No' },
                   { value: '1', label: 'Yes' },
@@ -233,6 +251,8 @@ function Dashboard() {
               <SelectField
                 label="GSTM1 null feature"
                 name="gstm1_null"
+                value={values.gstm1_null}
+                onChange={updateValue}
                 options={[
                   { value: '0', label: 'Present' },
                   { value: '1', label: 'Null' },
@@ -242,6 +262,8 @@ function Dashboard() {
               <SelectField
                 label="GSTT1 null feature"
                 name="gstt1_null"
+                value={values.gstt1_null}
+                onChange={updateValue}
                 options={[
                   { value: '0', label: 'Present' },
                   { value: '1', label: 'Null' },
@@ -259,11 +281,15 @@ function Dashboard() {
                 name="age"
                 min="15"
                 max="80"
+                value={values.age}
+                onChange={updateValue}
               />
 
               <SelectField
                 label="Gender"
                 name="female"
+                value={values.female}
+                onChange={updateValue}
                 options={[
                   { value: '1', label: 'Female' },
                   { value: '0', label: 'Male' },
@@ -273,6 +299,8 @@ function Dashboard() {
               <SelectField
                 label="Alcoholic"
                 name="alcohol"
+                value={values.alcohol}
+                onChange={updateValue}
                 options={[
                   { value: '1', label: 'Yes' },
                   { value: '0', label: 'No' },
@@ -282,6 +310,8 @@ function Dashboard() {
               <SelectField
                 label="HIV Presence"
                 name="hiv"
+                value={values.hiv}
+                onChange={updateValue}
                 options={[
                   { value: '1', label: 'HIV Positive' },
                   { value: '0', label: 'HIV Negative' },
@@ -294,6 +324,8 @@ function Dashboard() {
                 min="1.8"
                 max="5.0"
                 step="0.1"
+                value={values.albumin}
+                onChange={updateValue}
               />
 
               <NumberField
@@ -302,6 +334,8 @@ function Dashboard() {
                 min="12"
                 max="35"
                 step="0.1"
+                value={values.bmi}
+                onChange={updateValue}
               />
             </div>
           </div>
