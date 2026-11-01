@@ -69,7 +69,7 @@ function About() {
         </article>
       </div>
 
-      <div className="creators-section">
+      <div className="creators-section" id="creators">
         <span className="eyebrow">THE PEOPLE BEHIND THE PROJECT</span>
         <h2>Project Creators</h2>
 

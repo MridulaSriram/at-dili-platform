@@ -262,29 +262,29 @@ function Dashboard() {
               />
 
               <SelectField
-                label="Sex variable (model encoding)"
+                label="Gender"
                 name="female"
                 options={[
-                  { value: '0', label: '0 — Model category 0' },
-                  { value: '1', label: '1 — Model category 1' },
+                  { value: '1', label: 'Female' },
+                  { value: '0', label: 'Male' },
                 ]}
               />
 
               <SelectField
-                label="Alcohol variable (model encoding)"
+                label="Alcoholic"
                 name="alcohol"
                 options={[
-                  { value: '0', label: '0 — No' },
-                  { value: '1', label: '1 — Yes' },
+                  { value: '1', label: 'Yes' },
+                  { value: '0', label: 'No' },
                 ]}
               />
 
               <SelectField
-                label="HIV variable (model encoding)"
+                label="HIV Presence"
                 name="hiv"
                 options={[
-                  { value: '0', label: '0 — No' },
-                  { value: '1', label: '1 — Yes' },
+                  { value: '1', label: 'HIV Positive' },
+                  { value: '0', label: 'HIV Negative' },
                 ]}
               />
 

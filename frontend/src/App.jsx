@@ -1,4 +1,3 @@
-
 import './App.css'
 import Dashboard from './pages/Dashboard'
 import About from './pages/About'
@@ -18,6 +17,7 @@ function App() {
         <nav>
           <a href="#dashboard">Dashboard</a>
           <a href="#about">About AT-DILI</a>
+          <a href="#creators">Project Creators</a>
         </nav>
       </header>
 
