@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 
-const API_URL = 'http://127.0.0.1:8000'
+const API_URL = 'https://at-dili-backend.onrender.com'
 
 const initialValues = {
   nat2_slow: '0',
@@ -75,7 +75,7 @@ function Dashboard() {
     } catch (err) {
       setError(
         err.message === 'Failed to fetch'
-          ? 'Cannot connect to the demonstration API. Make sure the FastAPI server is running.'
+          ? 'Unable to connect to the demonstration API. The free server may be starting up. Please try again shortly.'
           : err.message
       )
     } finally {
