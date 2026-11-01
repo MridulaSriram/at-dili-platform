@@ -4,22 +4,27 @@ function About() {
     {
       name: 'M Samanvitha',
       registerNumber: 'RA9011009020072',
+      linkedin: 'https://www.linkedin.com/in/samanvitha-m-349141426/',
     },
     {
       name: 'Mayukha Andukuri',
       registerNumber: 'RA2511009020085',
+      linkedin: 'https://www.linkedin.com/in/mayukha-andukuri-b9b846386/',
     },
     {
       name: 'Mridula S',
       registerNumber: 'RA2511009020087',
+      linkedin: 'https://www.linkedin.com/in/mridula-sriram-06721442b/',
     },
     {
       name: 'Deksita Sasikumar',
       registerNumber: 'RA2511009020090',
+      linkedin: 'https://www.linkedin.com/in/deksita-sasikumar-344554377/',
     },
     {
       name: 'Ria Manuela Antony',
       registerNumber: 'RA2511009020095',
+      linkedin: 'https://www.linkedin.com/in/ria-manuela-antony-768529414/',
     },
   ]
 
@@ -74,15 +79,35 @@ function About() {
         </p>
 
         <div className="creators-grid">
-          {creators.map((creator) => (
+          {creators.map((creator, index) => (
             <article
               className="creator-card"
               key={creator.registerNumber}
+              style={{
+                textAlign: 'center',
+                ...(index === 4
+                  ? {
+                      gridColumn: '1 / -1',
+                      justifySelf: 'center',
+                      width: 'calc(50% - 0.5rem)',
+                    }
+                  : {}),
+              }}
             >
               <h3>{creator.name}</h3>
+
               <p className="creator-register">
                 ({creator.registerNumber})
               </p>
+
+              <a
+                className="creator-link"
+                href={creator.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn Profile ↗
+              </a>
             </article>
           ))}
         </div>
