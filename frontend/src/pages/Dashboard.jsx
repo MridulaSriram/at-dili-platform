@@ -1,5 +1,129 @@
 
+import { useState } from 'react'
+
+const API_URL = 'http://127.0.0.1:8000'
+
+const initialValues = {
+  nat2_slow: '0',
+  cyp2e1_c1c1: '0',
+  gstm1_null: '0',
+  gstt1_null: '0',
+  age: '35',
+  female: '0',
+  alcohol: '0',
+  hiv: '0',
+  albumin: '3.8',
+  bmi: '21.5',
+}
+
 function Dashboard() {
+  const [values, setValues] = useState(initialValues)
+  const [result, setResult] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const updateValue = (event) => {
+    const { name, value } = event.target
+
+    setValues((previous) => ({
+      ...previous,
+      [name]: value,
+    }))
+
+    setResult(null)
+    setError('')
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    setLoading(true)
+    setResult(null)
+    setError('')
+
+    try {
+      const payload = {
+        nat2_slow: Number(values.nat2_slow),
+        cyp2e1_c1c1: Number(values.cyp2e1_c1c1),
+        gstm1_null: Number(values.gstm1_null),
+        gstt1_null: Number(values.gstt1_null),
+        age: Number(values.age),
+        female: Number(values.female),
+        alcohol: Number(values.alcohol),
+        hiv: Number(values.hiv),
+        albumin: Number(values.albumin),
+        bmi: Number(values.bmi),
+      }
+
+      const response = await fetch(`${API_URL}/demo/predict`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(
+          data.detail || 'Unable to generate the demonstration output.'
+        )
+      }
+
+      setResult(data)
+    } catch (err) {
+      setError(
+        err.message === 'Failed to fetch'
+          ? 'Cannot connect to the demonstration API. Make sure the FastAPI server is running.'
+          : err.message
+      )
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleReset = () => {
+    setValues(initialValues)
+    setResult(null)
+    setError('')
+  }
+
+  const SelectField = ({ label, name, options }) => (
+    <div className="demo-field">
+      <label htmlFor={name}>{label}</label>
+      <select
+        id={name}
+        name={name}
+        value={values[name]}
+        onChange={updateValue}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+
+  const NumberField = ({ label, name, min, max, step = '1' }) => (
+    <div className="demo-field">
+      <label htmlFor={name}>{label}</label>
+      <input
+        id={name}
+        name={name}
+        type="number"
+        min={min}
+        max={max}
+        step={step}
+        value={values[name]}
+        onChange={updateValue}
+        required
+      />
+    </div>
+  )
+
   return (
     <>
       {/* Hero section */}
@@ -10,15 +134,14 @@ function Dashboard() {
           </span>
 
           <h1>
-            Understanding genetic risk in{" "}
-            <span>AT-DILI</span>
+            Understanding genetic risk in <span>AT-DILI</span>
           </h1>
 
           <p>
             Explore how genetic variation may contribute to
-            anti-tubercular drug-induced liver injury. This project
-            is developing a platform for presenting model-based
-            research findings in a clear and accessible way.
+            anti-tubercular drug-induced liver injury. This academic
+            project demonstrates a research workflow using a
+            synthetic-data model.
           </p>
 
           <a href="#dashboard" className="primary-button">
@@ -35,9 +158,9 @@ function Dashboard() {
             <span>RESEARCH PROJECT</span>
             <div className="science-line"></div>
             <strong>AT-DILI Analysis</strong>
-            <small>Genetic risk research platform</small>
+            <small>Genetic research platform</small>
             <div className="science-line"></div>
-            <small>Prediction model integration pending</small>
+            <small>Synthetic demo model connected</small>
           </div>
 
           <div className="floating-chip chip-top">
@@ -45,7 +168,7 @@ function Dashboard() {
           </div>
 
           <div className="floating-chip chip-bottom">
-            MODEL IN DEVELOPMENT
+            SYNTHETIC DEMONSTRATION
           </div>
         </div>
       </section>
@@ -60,144 +183,190 @@ function Dashboard() {
 
           <div className="status-pill">
             <span className="status-dot"></span>
-            Model not connected
+            Demo model connected
           </div>
         </div>
 
         <div className="notice">
           <div className="notice-icon">i</div>
           <p>
-            <strong>Development prototype:</strong> The prediction
-            model is being developed separately. The input fields
-            and prediction functionality will be added after the
-            model requirements are confirmed. No risk predictions
-            are generated by this prototype.
+            <strong>Educational demonstration only:</strong> This
+            model was trained entirely on synthetic data. The
+            outputs are simulated examples, not medical risk
+            estimates. Do not enter real patient information or use
+            the results for clinical decisions.
           </p>
         </div>
 
-        <div className="dashboard-card">
+        <form className="dashboard-card demo-form" onSubmit={handleSubmit}>
           <div className="card-symbol">⌬</div>
 
-          <h3>Prepare for Genetic Risk Analysis</h3>
+          <h3>Genetic and Clinical Demonstration Inputs</h3>
 
           <p>
-            This workspace will accept the information required by
-            the research model and display its output once the model
-            has been integrated and tested.
+            Enter fictional illustrative values to explore how the
+            demonstration model responds.
           </p>
 
-          <div
-            style={{
-              width: "100%",
-              maxWidth: "560px",
-              marginTop: "16px",
-              padding: "24px",
-              border: "1px solid #dcece3",
-              borderRadius: "12px",
-              background: "#f7fbf8",
-              textAlign: "left",
-            }}
-          >
-            <h3 style={{ marginTop: 0, fontSize: "17px" }}>
-              Model integration checklist
-            </h3>
+          <div className="demo-input-section">
+            <h4>Genetic demonstration inputs</h4>
 
-            <p style={{ fontSize: "13px", lineHeight: 1.8 }}>
-              The following details must be confirmed with the
-              model development team before prediction inputs
-              can be implemented.
-            </p>
+            <div className="demo-grid">
+              <SelectField
+                label="NAT2 slow acetylator feature"
+                name="nat2_slow"
+                options={[
+                  { value: '0', label: 'No' },
+                  { value: '1', label: 'Yes' },
+                ]}
+              />
 
-            <div style={{ display: "grid", gap: "14px" }}>
-              {[
-                {
-                  title: "Required input data",
-                  description:
-                    "Confirm which genetic variants or other variables the model accepts.",
-                },
-                {
-                  title: "Input format",
-                  description:
-                    "Confirm the accepted format, data types, and valid values.",
-                },
-                {
-                  title: "Model output",
-                  description:
-                    "Confirm whether the model returns a probability, risk category, or another result.",
-                },
-                {
-                  title: "Integration method",
-                  description:
-                    "Confirm how the website will communicate with the model.",
-                },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "12px",
-                  }}
-                >
-                  <span
-                    style={{
-                      display: "grid",
-                      placeItems: "center",
-                      flexShrink: 0,
-                      width: "24px",
-                      height: "24px",
-                      borderRadius: "50%",
-                      background: "#dff3e9",
-                      color: "#176b50",
-                      fontWeight: 700,
-                      fontSize: "12px",
-                    }}
-                  >
-                    ✓
-                  </span>
+              <SelectField
+                label="CYP2E1 c1/c1 feature"
+                name="cyp2e1_c1c1"
+                options={[
+                  { value: '0', label: 'No' },
+                  { value: '1', label: 'Yes' },
+                ]}
+              />
 
-                  <div>
-                    <strong
-                      style={{
-                        display: "block",
-                        color: "#18342f",
-                        fontSize: "13px",
-                      }}
-                    >
-                      {item.title}
-                    </strong>
+              <SelectField
+                label="GSTM1 null feature"
+                name="gstm1_null"
+                options={[
+                  { value: '0', label: 'Present' },
+                  { value: '1', label: 'Null' },
+                ]}
+              />
 
-                    <p
-                      style={{
-                        margin: "4px 0 0",
-                        fontSize: "12px",
-                        lineHeight: 1.7,
-                      }}
-                    >
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+              <SelectField
+                label="GSTT1 null feature"
+                name="gstt1_null"
+                options={[
+                  { value: '0', label: 'Present' },
+                  { value: '1', label: 'Null' },
+                ]}
+              />
             </div>
           </div>
 
-          <button
-            className="disabled-button"
-            type="button"
-            disabled
-          >
-            Prediction Currently Unavailable
-          </button>
+          <div className="demo-input-section">
+            <h4>Clinical demonstration inputs</h4>
 
-          <small>
-            The prediction feature will be enabled after integration
-            and validation of the research model.
+            <div className="demo-grid">
+              <NumberField
+                label="Age (years)"
+                name="age"
+                min="15"
+                max="80"
+              />
+
+              <SelectField
+                label="Sex variable (model encoding)"
+                name="female"
+                options={[
+                  { value: '0', label: '0 — Model category 0' },
+                  { value: '1', label: '1 — Model category 1' },
+                ]}
+              />
+
+              <SelectField
+                label="Alcohol variable (model encoding)"
+                name="alcohol"
+                options={[
+                  { value: '0', label: '0 — No' },
+                  { value: '1', label: '1 — Yes' },
+                ]}
+              />
+
+              <SelectField
+                label="HIV variable (model encoding)"
+                name="hiv"
+                options={[
+                  { value: '0', label: '0 — No' },
+                  { value: '1', label: '1 — Yes' },
+                ]}
+              />
+
+              <NumberField
+                label="Albumin (g/dL)"
+                name="albumin"
+                min="1.8"
+                max="5.0"
+                step="0.1"
+              />
+
+              <NumberField
+                label="BMI (kg/m²)"
+                name="bmi"
+                min="12"
+                max="35"
+                step="0.1"
+              />
+            </div>
+          </div>
+
+          <div className="demo-actions">
+            <button
+              type="submit"
+              className="primary-button"
+              disabled={loading}
+            >
+              {loading ? 'Generating...' : 'Generate Demo Output'}
+            </button>
+
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={handleReset}
+              disabled={loading}
+            >
+              Reset Inputs
+            </button>
+          </div>
+
+          {error && (
+            <div className="demo-error" role="alert">
+              {error}
+            </div>
+          )}
+
+          {result && (
+            <div className="demo-result" aria-live="polite">
+              <span className="eyebrow">SYNTHETIC DEMO OUTPUT</span>
+
+              <h3>Illustrative Model Probability</h3>
+
+              <div className="demo-probability">
+                {result.percentage.toFixed(2)}%
+              </div>
+
+              <p>
+                This is a simulated output from the Combined (L2)
+                demonstration model.
+              </p>
+
+              <div className="demo-result-details">
+                <span>Model: {result.model_name}</span>
+                <span>Clinical validation: No</span>
+                <span>Demo output: Yes</span>
+              </div>
+
+              <div className="notice demo-disclaimer">
+                <div className="notice-icon">i</div>
+                <p>{result.disclaimer}</p>
+              </div>
+            </div>
+          )}
+
+          <small className="demo-footer-note">
+            Synthetic educational prototype · Not for diagnosis,
+            treatment decisions or real patient assessment.
           </small>
-        </div>
+        </form>
       </section>
     </>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard
