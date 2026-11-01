@@ -1,0 +1,176 @@
+
+/* AT-DILI DEMONSTRATION DASHBOARD */
+
+.demo-form {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.demo-input-section {
+  width: 100%;
+  margin-top: 28px;
+  text-align: left;
+}
+
+.demo-input-section h4 {
+  margin-bottom: 16px;
+  color: #18342f;
+  font-size: 15px;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.demo-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demo-field label {
+  color: #34534b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.demo-field input,
+.demo-field select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #d5e4dc;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #18342f;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.demo-field input:focus,
+.demo-field select:focus {
+  border-color: #258363;
+  box-shadow: 0 0 0 3px rgba(37, 131, 99, 0.12);
+}
+
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.demo-actions button {
+  cursor: pointer;
+}
+
+.demo-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.secondary-button {
+  padding: 12px 22px;
+  border: 1px solid #cbded3;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #245d49;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.secondary-button:hover {
+  background: #f0f7f3;
+}
+
+.demo-result {
+  width: 100%;
+  margin-top: 32px;
+  padding: 26px;
+  border: 1px solid #cfe5d8;
+  border-radius: 14px;
+  background: #f5faf6;
+  text-align: center;
+}
+
+.demo-result h3 {
+  margin: 12px 0;
+  color: #18342f;
+}
+
+.demo-probability {
+  margin: 16px 0;
+  color: #176b50;
+  font-size: clamp(36px, 7vw, 54px);
+  font-weight: 700;
+}
+
+.demo-result p {
+  color: #526a61;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.demo-result-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.demo-result-details span {
+  padding: 7px 11px;
+  border: 1px solid #dcece3;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #34534b;
+  font-size: 11px;
+}
+
+.demo-disclaimer {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.demo-error {
+  margin-top: 20px;
+  padding: 14px;
+  border: 1px solid #efcaca;
+  border-radius: 8px;
+  background: #fff5f5;
+  color: #9c3030;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.demo-footer-note {
+  display: block;
+  margin-top: 24px;
+  color: #71847b;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .demo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-actions {
+    flex-direction: column;
+  }
+
+  .demo-actions button {
+    width: 100%;
+  }
+
+  .demo-result {
+    padding: 18px;
+  }
+}

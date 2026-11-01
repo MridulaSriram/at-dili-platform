@@ -1,0 +1,8 @@
+model,AUC,AUC_lo,AUC_hi,Brier,calib_slope,calib_in_large,mean_pred,observed
+literature score (no fitting),0.681,0.654,0.713,0.101,1.019,-0.049,0.126,0.121
+clinical only,0.588,0.558,0.618,0.105,0.802,0.001,0.121,0.121
+genetic only,0.664,0.636,0.696,0.101,0.961,-0.001,0.121,0.121
+combined (L2),0.704,0.678,0.732,0.1,0.918,0.001,0.121,0.121
+combined (elastic net),0.703,0.677,0.732,0.1,0.933,0.0,0.121,0.121
+combined + PPAR (elastic net),0.703,0.676,0.731,0.1,0.929,0.0,0.121,0.121
+combined (boosted trees),0.681,0.656,0.71,0.102,0.794,0.002,0.12,0.121

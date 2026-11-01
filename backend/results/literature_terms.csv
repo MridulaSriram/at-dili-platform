@@ -1,0 +1,5 @@
+term,label,OR,beta,se
+nat2_slow,NAT2 slow acetylator (2 slow alleles) vs other,3.3,1.1939224684724346,0.11195494604847257
+cyp2e1_c1c1,CYP2E1 RsaI/PstI c1/c1 vs c2 carrier,1.39,0.3293037471426003,0.13929771906361066
+gstm1_null,GSTM1 null (deletion),1.3,0.26236426446749106,0.0779034820283627
+gstt1_null,"GSTT1 null (deletion), single study",1.83,0.6043159668533296,0.32066256954952965

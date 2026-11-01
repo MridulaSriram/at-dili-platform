@@ -1,0 +1,27 @@
+{
+    "model_name": "combined (L2)",
+    "model_type": "Logistic Regression with L2 regularisation",
+    "purpose": "Synthetic software demonstration only",
+    "clinical_validation": false,
+    "training_data": "Simulated synthetic cohort",
+    "training_records": 3000,
+    "synthetic_cases": 362,
+    "synthetic_prevalence": 0.12066666666666667,
+    "random_seed": 2026,
+    "features": [
+        "nat2_slow",
+        "cyp2e1_c1c1",
+        "gstm1_null",
+        "gstt1_null",
+        "age10",
+        "female",
+        "alcohol",
+        "hiv",
+        "albumin",
+        "bmi_low"
+    ],
+    "feature_count": 10,
+    "sklearn_version": "1.9.1",
+    "created_at_utc": "2026-11-01T08:33:33.771227+00:00",
+    "disclaimer": "Predictions are simulated demonstration outputs, not medical risk estimates. Do not use for clinical decisions or real patient assessment."
+}

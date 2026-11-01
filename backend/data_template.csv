@@ -1,0 +1,4 @@
+patient_id,region,nat2_rs1801280,nat2_rs1799930,nat2_rs1799931,cyp2e1_rs2031920,gstm1_null,gstt1_null,ppara_snp,pparg_snp,age,female,alcohol,hiv,albumin,bmi,atdili
+P001,North,1,1,0,0,1,0,1,0,45,0,1,0,3.1,17.8,1
+P002,South,0,1,0,1,0,0,0,1,29,1,0,0,3.9,21.2,0
+P003,West,2,0,0,0,0,1,2,0,58,0,0,1,3.0,16.9,1

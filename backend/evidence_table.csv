@@ -1,0 +1,18 @@
+gene,variant,model,or,ci_low,ci_high,p,source_type,used_in_score,note
+NAT2,slow acetylator vs other,genotype class,3.30,2.65,4.11,<0.00001,meta-analysis (35 studies),YES,Single NAT2 term. This is the main NAT2 effect in the score.
+NAT2,rs1799929,dominant,1.35,1.12,1.63,<0.001,umbrella/meta-analysis,NO,Correlated with acetylator class. Adding it would double count NAT2.
+NAT2,rs1799930,dominant,1.43,1.23,1.66,<0.001,umbrella/meta-analysis,NO,Same reason.
+NAT2,rs1799931,dominant,1.22,1.02,1.46,0.03,umbrella/meta-analysis,NO,Same reason.
+NAT2,rs1495741 AA vs GG/AG,genotype,7.29,3.22,17.52,<0.001,single paediatric case-control,NO,Tag SNP for acetylator status. Single study and very wide CI. Check in Indian data before using as a substitute for acetylator class.
+NAT2,rs1799929 CT vs CC,genotype,0.70,0.50,0.97,not specified,unclear,NO,Direction conflicts with the meta-analysis row above. Needs the original paper.
+NAT2,rs1799930 AA vs GG,genotype,1.75,,,not recorded,unclear,NO,Different model from the dominant row. Do not mix.
+NAT2,rs1799931 AA vs GG,genotype,2.32,,,not recorded,unclear,NO,Same.
+NAT2,rs1208 GG vs AA,genotype,2.24,,,not recorded,unclear,NO,Same.
+CYP2E1,RsaI/PstI c1/c1 vs c2 carriers,genotype,1.39,1.06,1.83,0.02,meta-analysis (24 studies),YES,c1/c1 is the risk genotype. rs2031920 and rs3813867 are one haplotype (*5B) so only one term.
+CYP2E1,rs3813867 GC,genotype,4.30,0.80,24.40,0.08,prospective cohort (n=55),NO,Not significant and tiny sample.
+CYP2E1,rs2031920/rs8192775/rs2515641,genotype,,,,ns,prospective cohort (n=207),NO,No association reported.
+GST,GSTM1 null,null vs present,1.30,1.12,1.52,0.0007,meta-analysis (19 studies),YES,Deletion. Typed by multiplex PCR or copy number assay. Not a SNP.
+GST,GSTT1 null,null vs present,1.83,1.01,3.55,0.049,single case-control (adjusted),YES,Single study. Widest interval of the four terms. Replace when a pooled estimate is available.
+GST,GSTM1/GSTT1 dual null,dual null,2.12,1.02,4.38,0.044,single case-control (adjusted),NO,Covered by the two main effects. Using it too would double count.
+PPARA,none,,,,,,none found,NO,No human AT-DILI genotype effect found. Kept as an exploratory column only.
+PPARG,none,,,,,,none found,NO,No human AT-DILI genotype effect found. Kept as an exploratory column only.

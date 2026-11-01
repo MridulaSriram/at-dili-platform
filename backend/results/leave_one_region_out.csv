@@ -1,0 +1,6 @@
+held_out,n,cases,AUC_combined,mean_pred_combined,observed,AUC_literature,mean_pred_literature
+East,462,58,0.655,0.108,0.126,0.64,0.112
+North,885,93,0.67,0.14,0.105,0.656,0.135
+Northeast,315,33,0.697,0.12,0.105,0.675,0.12
+South,739,92,0.755,0.118,0.124,0.729,0.127
+West,599,86,0.732,0.118,0.144,0.695,0.128
