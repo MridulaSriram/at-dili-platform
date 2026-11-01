@@ -11,6 +11,7 @@ real patient risk assessment or medical decisions.
 """
 
 import json
+import os
 from pathlib import Path
 
 import joblib
@@ -67,22 +68,30 @@ app = FastAPI(
 # CORS configuration
 # --------------------------------------------------
 
-# Local development origins.
-# Port 5176 is included because Vite selected it
-# when the earlier development ports were occupied.
+# Production frontend origin.
+# Can be overridden using the FRONTEND_ORIGIN
+# environment variable in Render.
+
+FRONTEND_ORIGIN = os.getenv(
+    "FRONTEND_ORIGIN",
+    "https://at-dili-platform.onrender.com"
+).rstrip("/")
+
+ALLOWED_ORIGINS = [
+    FRONTEND_ORIGIN,
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5174",
+    "http://localhost:5175",
+    "http://127.0.0.1:5175",
+    "http://localhost:5176",
+    "http://127.0.0.1:5176",
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174",
-        "http://localhost:5175",
-        "http://127.0.0.1:5175",
-        "http://localhost:5176",
-        "http://127.0.0.1:5176",
-    ],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
@@ -181,8 +190,8 @@ def predict(data: PredictionInput):
             "disclaimer": metadata["disclaimer"]
         }
 
-    except Exception as error:
+    except Exception:
         raise HTTPException(
             status_code=500,
-            detail=f"Prediction failed: {str(error)}"
+            detail="Prediction failed. Please try again later."
         )
